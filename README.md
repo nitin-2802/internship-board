@@ -2,7 +2,7 @@
 
 An accessible, framework-free student internship listing interface built with semantic HTML, responsive CSS, and vanilla JavaScript.
 
-**Live Preview:** https://<your-username>.github.io/internship-board/
+**Live Preview:** https://github.com/nitin-2802/internship-board
 
 ## Features
 - **Reusable Card Rendering:** Loads records dynamically from `data/internships.json` while preserving all record IDs (`INT-101` to `INT-105`).
