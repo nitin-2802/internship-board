@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Internship Board</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to internship listings</a>
+
+  <header class="site-header">
+    <div class="container">
+      <p class="eyebrow">EdVyro Student Portal</p>
+      <h1>Student Internship Board</h1>
+      <p class="subtitle">
+        Explore beginner-friendly internships across engineering, design, analytics, and security.
+      </p>
+    </div>
+  </header>
+
+  <main id="main-content" class="container">
+    <section class="controls" aria-labelledby="filter-heading">
+      <h2 id="filter-heading" class="visually-hidden">Search and filter internships</h2>
+
+      <form id="filter-form" class="filter-grid" role="search" novalidate>
+        <div class="field">
+          <label for="search-input">Search</label>
+          <input
+            type="search"
+            id="search-input"
+            name="search"
+            placeholder="Title, skill, location, or ID..."
+            autocomplete="off"
+          />
+        </div>
+
+        <div class="field">
+          <label for="domain-select">Domain</label>
+          <select id="domain-select" name="domain">
+            <option value="all">All domains</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="mode-select">Work mode</label>
+          <select id="mode-select" name="mode">
+            <option value="all">All modes</option>
+            <option value="Remote">Remote</option>
+            <option value="Hybrid">Hybrid</option>
+            <option value="On-site">On-site</option>
+          </select>
+        </div>
+
+        <div class="field field-actions">
+          <button type="button" id="reset-btn" class="btn btn-secondary">
+            Reset filters
+          </button>
+        </div>
+      </form>
+    </section>
+
+    <div class="status-bar">
+      <p id="results-status" role="status" aria-live="polite">Loading internships...</p>
+    </div>
+
+    <section id="loading-state" class="state-box" aria-live="polite" aria-busy="true">
+      <div class="spinner" aria-hidden="true"></div>
+      <p>Fetching available internships...</p>
+    </section>
+
+    <section id="error-state" class="state-box state-error" role="alert" hidden>
+      <h2>Could not load internships</h2>
+      <p id="error-message">Something went wrong while fetching the listings.</p>
+      <button type="button" id="retry-btn" class="btn btn-primary">Retry</button>
+    </section>
+
+    <section id="empty-state" class="state-box" hidden>
+      <h2>No matching internships found</h2>
+      <p>Try clearing your search term or selecting a different domain or work mode.</p>
+      <button type="button" id="empty-reset-btn" class="btn btn-primary">
+        Show all internships
+      </button>
+    </section>
+
+    <section aria-labelledby="listings-heading">
+      <h2 id="listings-heading" class="visually-hidden">Available internships</h2>
+      <div id="internship-list" class="card-grid" hidden></div>
+    </section>
+  </main>
+
+  <dialog id="internship-dialog" aria-labelledby="dialog-title">
+    <div class="dialog-header">
+      <div>
+        <span id="dialog-id" class="badge badge-muted"></span>
+        <h2 id="dialog-title"></h2>
+      </div>
+      <button type="button" id="dialog-close-btn" class="icon-btn" aria-label="Close dialog">
+        &times;
+      </button>
+    </div>
+
+    <div class="dialog-body">
+      <dl class="meta-list" id="dialog-meta"></dl>
+
+      <div class="skills-block">
+        <h3>Required skills</h3>
+        <ul id="dialog-skills" class="skill-tags"></ul>
+      </div>
+
+      <hr />
+
+      <form id="apply-form" novalidate>
+        <h3>Apply for this internship</h3>
+
+        <div class="field">
+          <label for="applicant-name">Full name <span aria-hidden="true">*</span></label>
+          <input type="text" id="applicant-name" name="name" required autocomplete="name" />
+          <p class="field-error" id="name-error" aria-live="polite"></p>
+        </div>
+
+        <div class="field">
+          <label for="applicant-email">Email address <span aria-hidden="true">*</span></label>
+          <input type="email" id="applicant-email" name="email" required autocomplete="email" />
+          <p class="field-error" id="email-error" aria-live="polite"></p>
+        </div>
+
+        <div class="field">
+          <label for="applicant-url">Portfolio or GitHub URL (optional)</label>
+          <input
+            type="url"
+            id="applicant-url"
+            name="portfolioUrl"
+            placeholder="https://github.com/username"
+          />
+          <p class="field-error" id="url-error" aria-live="polite"></p>
+        </div>
+
+        <p id="form-feedback" class="form-feedback" role="status" aria-live="polite"></p>
+
+        <div class="dialog-actions">
+          <button type="button" id="cancel-apply-btn" class="btn btn-secondary">Cancel</button>
+          <button type="submit" class="btn btn-primary">Submit application</button>
+        </div>
+      </form>
+    </div>
+  </dialog>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>Built with semantic HTML, responsive CSS, and vanilla JavaScript.</p>
+      <button type="button" id="simulate-error-btn" class="btn-link">
+        Test error &amp; retry state
+      </button>
+    </div>
+  </footer>
+
+  <script src="app.js" defer></script>
+</body>
+</html>
